@@ -25,3 +25,6 @@ Route::get('/ringkasan', function () {
 Route::get('/pemetaan', function () {
     return view('user.pemetaan');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
