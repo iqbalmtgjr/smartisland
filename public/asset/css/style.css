@@ -187,7 +187,7 @@
 }
 
 .page-header {
-    background: url(../img/carousel-1.jpg) center center no-repeat;
+    background: url(../img/carousel-2.png) center center no-repeat;
     background-size: cover;
 }
 
@@ -196,9 +196,10 @@
     font-weight: 500;
 }
 
-.page-header .breadcrumb-item a,
+.page-header .breadcrumb-item a, h1,
 .page-header .breadcrumb-item+.breadcrumb-item::before {
-    color: #696E77;
+    /* color: #696E77; */
+    color: #ffff;
 }
 
 .page-header .breadcrumb-item a:hover,

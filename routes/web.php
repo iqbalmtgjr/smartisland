@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\MapPemetaan;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,9 @@ Route::get('/dokumentasi', function () {
 Route::get('/ringkasan', function () {
     return view('user.ringkasan');
 });
-Route::get('/pemetaan', function () {
-    return view('user.pemetaan');
-});
+
+Route::get('/pemetaan', MapPemetaan::class);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

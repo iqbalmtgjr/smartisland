@@ -30,6 +30,12 @@
 
     <!-- Template Stylesheet -->
     <link href={{ asset('asset/css/style.css') }} rel="stylesheet" />
+
+    {{-- Leafletjs --}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    @stack('header')
+    @livewireStyles
 </head>
 
 <body>
@@ -71,6 +77,7 @@
     <!-- Navbar End -->
 
     @yield('konten')
+    {{ isset($slot) ? $slot : null }}
     <div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
@@ -122,6 +129,12 @@
 
     <!-- Template Javascript -->
     <script src={{ asset('asset/js/main.js') }}></script>
+
+    {{-- Leafletjs --}}
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    @stack('footer')
+    @livewireScripts
 </body>
 
 </html>
