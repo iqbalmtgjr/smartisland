@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_lokaso');
+            $table->string('nama_lokasi');
             $table->string('geojson');
             $table->string('deskripsi');
             $table->timestamps();

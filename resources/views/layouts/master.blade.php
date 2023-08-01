@@ -23,7 +23,7 @@
     <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('admin/css/icons.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet" type="text/css">
-
+    @livewireStyles
 </head>
 
 
@@ -164,7 +164,8 @@
                         </div>
                         <!-- end page title end breadcrumb -->
 
-                        @yield('content')
+                        {{-- @yield('content') --}}
+                        @livewire('kelola-maps')
 
                         <!--end row-->
 
@@ -225,7 +226,7 @@
         });
     </script>
 
-
+    @livewireScripts
 </body>
 
 </html>
