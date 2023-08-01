@@ -28,4 +28,4 @@ Route::get('/pemetaan', MapPemetaan::class);
 
 Auth::routes();
 
-Route::get('/maps', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/maps', [App\Http\Controllers\HomeController::class, 'index'])->name('maps');

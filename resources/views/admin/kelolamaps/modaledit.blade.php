@@ -1,12 +1,12 @@
-<div wire:ignore.self class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="tambah"
+<div wire:ignore.self class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="tambah"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Lokasi</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Lokasi</h5>
             </div>
             <div class="modal-body">
-                <form wire:submit.prevent="store">
+                <form wire:submit.prevent="update">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12 ms-auto">
@@ -14,7 +14,7 @@
                                     <label for="recipient-name" class="col-form-label">Nama Lokasi</label>
                                     <input wire:model="nama_lokasi" type="text"
                                         class="form-control @error('nama_lokasi') is-invalid @enderror" name=""
-                                        value="" placeholder="Masukkan nama lokasi.">
+                                        placeholder="Masukkan nama lokasi.">
                                     @error('nama_lokasi')
                                         <div class="text-danger ml-3 mt-2">
                                             {{ $message }}
@@ -45,6 +45,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{-- </div> --}}
                     </div>
             </div>
             <div class="modal-footer">

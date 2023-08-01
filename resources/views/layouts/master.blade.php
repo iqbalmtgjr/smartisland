@@ -24,6 +24,7 @@
     <link href="{{ asset('admin/css/icons.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet" type="text/css">
     @livewireStyles
+    @stack('header')
 </head>
 
 
@@ -218,15 +219,25 @@
     <!-- Datatable init js -->
     <script src="{{ asset('admin/pages/datatables.init.js') }}"></script>
 
-    <!-- App js -->
-    <script src="{{ asset('admin/js/app.js') }}"></script>
-    <script type="text/javascript">
+    <script>
         $(document).ready(function() {
             $('#datatable2').DataTable();
         });
     </script>
-
     @livewireScripts
+    <!-- App js -->
+
+    <script src="{{ asset('admin/js/app.js') }}"></script>
+    <script type="text/javascript">
+        window.livewire.on('locationStore', () => {
+            $('#tambah').modal('hide');
+        });
+
+        window.livewire.on('locationUpdate', () => {
+            $('#edit').modal('hide');
+        });
+    </script>
+    @stack('footer')
 </body>
 
 </html>
