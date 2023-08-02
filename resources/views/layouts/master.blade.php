@@ -219,11 +219,11 @@
     <!-- Datatable init js -->
     <script src="{{ asset('admin/pages/datatables.init.js') }}"></script>
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#datatable2').DataTable();
         });
-    </script>
+    </script> --}}
     @livewireScripts
     <!-- App js -->
 

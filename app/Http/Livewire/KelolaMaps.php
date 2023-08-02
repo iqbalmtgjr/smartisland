@@ -4,11 +4,16 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Location;
+use Livewire\WithPagination;
 
 class KelolaMaps extends Component
 {
-    public $data, $nama_lokasi, $geojson, $deskripsi, $validator, $location_id;
+    use WithPagination;
+
+    public $nama_lokasi, $geojson, $deskripsi, $validator, $location_id;
     public $updateMode = false;
+    public $paginate = 5;
+    public $search;
 
     protected $listeners = [
         'mapStored' => 'handleStored'
@@ -16,8 +21,11 @@ class KelolaMaps extends Component
 
     public function render()
     {
-        $this->data = Location::latest()->get();
-        return view('livewire.kelola-maps');
+        return view('livewire.kelola-maps', [
+            'locations' => $this->search === null ?
+                Location::latest()->paginate($this->paginate) :
+                Location::latest()->where('nama_lokasi', 'like', '%' . $this->search . '%')->paginate($this->paginate)
+        ]);
     }
 
     private function resetInput()

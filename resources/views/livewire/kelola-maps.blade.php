@@ -1,8 +1,4 @@
 <div>
-    {{-- @push('header')
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
-    @endpush --}}
-    {{-- @livewire('map-create') --}}
     @if (Session::has('sukses'))
         <?php toastr()->success(session('sukses'), 'Sukses'); ?>
     @endif
@@ -13,11 +9,25 @@
         <div class="col-lg-12 col-sm-12">
             <div class="card m-b-30">
                 <div class="card-body table-responsive">
-                    <button class="btn btn-primary mb-2 float-right" data-toggle="modal" data-target="#tambah">+
-                        Tambah Data Gis</button>
-                    {{-- <h5 class="header-title">Data GIS Livewire</h5> --}}
-                    <div class="">
-                        <table id="datatable2" class="table">
+                    <div>
+                        <div class="row ml-1">
+                            <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#tambah">+
+                                Tambah Data Gis</button>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select wire:model="paginate" name="" id="" class="form-control form-control-sm sm w-auto">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <input type="text" wire:model="search" class="form-control form-control-sm w-auto float-right" placeholder="Cari">
+                            </div>
+                        </div>
+                            <hr>
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -27,9 +37,9 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-
+                            
                             <tbody>
-                                @foreach ($data as $item)
+                                @foreach ($locations as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->nama_lokasi }}</td>
@@ -47,11 +57,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="d-flex">
+                            {!! $locations->withQueryString()->links('pagination::bootstrap-4') !!}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     @push('footer')
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script type="text/javascript">
