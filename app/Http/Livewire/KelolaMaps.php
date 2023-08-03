@@ -19,6 +19,11 @@ class KelolaMaps extends Component
         'mapStored' => 'handleStored'
     ];
 
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         return view('livewire.kelola-maps', [
@@ -52,8 +57,10 @@ class KelolaMaps extends Component
 
         $this->resetInput();
 
+
         $this->emit('locationStore');
         $this->emit('mapStored', $location);
+        $this->updatingSearch();
     }
 
     public function edit($id)
@@ -86,6 +93,7 @@ class KelolaMaps extends Component
             session()->flash('sukses', 'Data berhasil diedit!');
             $this->resetInput();
             $this->emit('locationUpdate');
+            $this->updatingSearch();
         }
     }
 

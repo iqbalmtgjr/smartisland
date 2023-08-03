@@ -14,6 +14,7 @@
                             <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#tambah">+
                                 Tambah Data Gis</button>
                         </div>
+                        {{-- <hr> --}}
                         <div class="row">
                             <div class="col">
                                 <select wire:model="paginate" name="" id="" class="form-control form-control-sm sm w-auto">
@@ -26,7 +27,6 @@
                                 <input type="text" wire:model="search" class="form-control form-control-sm w-auto float-right" placeholder="Cari">
                             </div>
                         </div>
-                            <hr>
                         <table class="table">
                             <thead>
                                 <tr>
