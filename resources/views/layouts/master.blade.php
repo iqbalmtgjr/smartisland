@@ -23,6 +23,11 @@
     <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('admin/css/icons.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet" type="text/css">
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
     @livewireStyles
     @stack('header')
 </head>
@@ -166,7 +171,25 @@
                         <!-- end page title end breadcrumb -->
 
                         {{-- @yield('content') --}}
-                        @livewire('kelola-maps')
+                        {{-- @livewire('kelola-maps') --}}
+                        @include('admin/kelolamaps/modaltambah')
+                        @include('admin/kelolamaps/modaledit')
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <div class="card m-b-30">
+                                    <div class="card-body table-responsive">
+                                        <div>
+                                            <div class="row ml-1 float-right">
+                                                <button class="btn btn-primary mb-2" data-toggle="modal"
+                                                    data-target="#tambah">+
+                                                    Tambah Data Gis</button>
+                                            </div>
+                                            <livewire:location-table />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <!--end row-->
 
