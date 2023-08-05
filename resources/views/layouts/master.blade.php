@@ -172,7 +172,8 @@
 
                         {{-- @yield('content') --}}
                         {{-- @livewire('kelola-maps') --}}
-                        @include('admin/kelolamaps/modaltambah')
+                        <livewire:kelola-maps />
+                        {{-- @include('admin/kelolamaps/modaltambah')
                         @include('admin/kelolamaps/modaledit')
                         <div class="row">
                             <div class="col-lg-12 col-sm-12">
@@ -189,7 +190,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!--end row-->
 
