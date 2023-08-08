@@ -17,6 +17,9 @@
                     {{-- <h5>Map</h5> --}}
                     <div wire:ignore id='map' style='width: 100%; height: 500px;'></div>
                 </div>
+                {{-- <div class="col-lg-4">
+                    <img src="" alt="">
+                </div> --}}
             </div>
         </div>
     </div>
@@ -38,13 +41,6 @@
         // map.setStyle(`mapbox://styles/mapbox/${style}`)
 
         // map.addControl(new mapboxgl.NavigationControl())
-
-        // map.on('click', (e) => {
-        //     const longtitude = e.lngLat.lng
-        //     const lattitude = e.lngLat.lat
-
-        //     console.log({longtitude, lattitude});
-        // })
 
         var peta1 = L.tileLayer(
             'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaXFiYWxtdGdqciIsImEiOiJjbGtqd3EzN2IwdHd0M2ttanZtazc0ejByIn0.T68Hj4RztNTWBTq-nusaog', {
@@ -75,36 +71,50 @@
                 id: 'mapbox/dark-v10'
             });
 
-        // var cities = L.layerGroup([littleton, denver, aurora, golden]);
-        // var map = L.map('map').setView([0.7690416, 108.687467], 13);
+        @foreach ($locations as $datas)
+            var data{{ $datas->id }} = L.layerGroup();
+        @endforeach
+
+        var lokasi = L.layerGroup();
+
         var map = L.map('map', {
             center: [0.7690416, 108.687467],
             zoom: 13,
-            layers: [peta2]
+            layers: [peta2,
+                @foreach ($locations as $datas)
+                    data{{ $datas->id }},
+                @endforeach
+            ]
         });
 
-        peta2.addTo(map);
-        
+
+
         var baseMaps = {
-            // "<span style='color: red'>My Layer</span>": peta1,
-            // "<p>Grayscale</p>": peta1,
-            // "<p>Satellite</p>": peta2,
-            // "<p>Streets</p>": peta3,
-            // "<p>Dark</p>": peta4
             "Grayscale": peta1,
             "Satellite": peta2,
             "Streets": peta3,
             "Dark": peta4
         };
 
-        // var overlayMaps = {
-        //     "Cities": cities
-        // };
+        var overlayer = {
+            @foreach ($locations as $datas)
+                "{{ $datas->nama_lokasi }}": data{{ $datas->id }},
+            @endforeach
+        };
 
-        L.control.layers(baseMaps).addTo(map);
+        L.control.layers(baseMaps, overlayer).addTo(map);
 
-        var marker = L.marker([0.7689279335312733, 108.70722883110494]).addTo(map);
+        @foreach ($locations as $datas)
+            L.geoJSON(<?= $datas->geojson ?>).addTo(data{{ $datas->id }}).bindPopup(
+                'Ini {{ $datas->nama_lokasi }}');
+        @endforeach
 
-        marker.bindPopup("<b>Pri oi!</b><br>Tuk dh muncol titik e wkwkwk.").openPopup();
+        // map.on('click', (e) => {
+        //     const longtitude = new leaflet.LatLng(loc.latitude, loc.longitude);
+
+        //     console.log({
+        //         longtitude,
+        //     });
+        // })
     </script>
 @endpush
