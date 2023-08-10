@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 class KelolaMaps extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public $nama_lokasi, $geojson, $deskripsi, $validator, $location_id;
     public $updateMode = false;

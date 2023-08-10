@@ -170,9 +170,10 @@
                         </div>
                         <!-- end page title end breadcrumb -->
 
-                        {{-- @yield('content') --}}
+                        @yield('content')
+                        {{-- {{ $content }} --}}
                         {{-- @livewire('kelola-maps') --}}
-                        <livewire:kelola-maps />
+                        {{-- @livewire('belajar') --}}
                         {{-- @include('admin/kelolamaps/modaltambah')
                         @include('admin/kelolamaps/modaledit')
                         <div class="row">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Belajar;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\MapPemetaan;
 
@@ -28,4 +29,10 @@ Route::get('/pemetaan', MapPemetaan::class);
 
 Auth::routes();
 
-Route::get('/maps', [App\Http\Controllers\HomeController::class, 'index'])->name('maps');
+Route::get('/belajar', Belajar::class);
+// Route::get('/belajar', function () {
+//     return view('belajar');
+// });
+Route::get('/maps', function () {
+    return view('admin.kelolamaps.index');
+});

@@ -42,9 +42,9 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($locations as $item)
+                                @foreach ($locations as $index => $item)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $locations->firstItem() + $index }}</td>
                                         <td>{{ $item->nama_lokasi }}</td>
                                         {{-- <td>{{ $item->geojson }}</td> --}}
                                         <td>{{ $item->deskripsi }}</td>
@@ -61,7 +61,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex">
-                            {!! $locations->withQueryString()->links('pagination::bootstrap-4') !!}
+                            {{ $locations->links() }}
                         </div>
                     </div>
                 </div>
