@@ -227,9 +227,11 @@
                     // markerElement.className = 'marker' + locationId
                     markerElement.className = 'marker'
                     markerElement.id = locationId
-                    // markerElement.style.backgroundImage = 'url({!! asset('titik/titikmerah.png') !!})'
-                    // markerElement.style.width = ''
-                    // markerElement.style.height = ''
+                    // markerElement.style.backgroundImage = 'url({{ asset('titik/titikmerah.png') }})'
+                    // markerElement.style.backgrounSize = 'cover'
+                    // markerElement.style.width = '50px'
+                    // markerElement.style.height = '50px'
+                    // markerElement.style.borderRadius = '50%'
 
                     new mapboxgl.Marker(markerElement)
                         .setLngLat(geometry.coordinates)
