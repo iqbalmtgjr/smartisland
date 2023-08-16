@@ -22,11 +22,22 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Geojson</label>
-                                    <textarea wire:model="geojson" placeholder="Masukkan data geojson."
-                                        class="form-control @error('geojson') is-invalid @enderror" name="" id="" cols="30"
-                                        rows="5"></textarea>
-                                    @error('geojson')
+                                    <label for="recipient-name" class="col-form-label">Longtitude</label>
+                                    <input wire:model="longtitude" type="text"
+                                        class="form-control @error('longtitude') is-invalid @enderror" name=""
+                                        value="" placeholder="Masukkan Longtitude.">
+                                    @error('longtitude')
+                                        <div class="text-danger ml-3 mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Lattitude</label>
+                                    <input wire:model="lattitude" type="text"
+                                        class="form-control @error('lattitude') is-invalid @enderror" name=""
+                                        value="" placeholder="Masukkan lattitude.">
+                                    @error('lattitude')
                                         <div class="text-danger ml-3 mt-2">
                                             {{ $message }}
                                         </div>
@@ -34,10 +45,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Deskripsi</label>
-                                    <textarea wire:model="deskripsi" placeholder="Masukkan data geojson."
+                                    <textarea wire:model="deskripsi" placeholder="Masukkan deskripsi."
                                         class="form-control @error('deskripsi') is-invalid @enderror" name="" id="" cols="30"
                                         rows="5"></textarea>
                                     @error('deskripsi')
+                                        <div class="text-danger ml-3 mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Upload Gambar</label>
+                                    <input wire:model="gambar" type="file" class="form-control" multiple id="">
+                                    @error('gambar')
                                         <div class="text-danger ml-3 mt-2">
                                             {{ $message }}
                                         </div>

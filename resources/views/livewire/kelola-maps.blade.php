@@ -34,6 +34,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Gambar</th>
                                     <th>Nama Lokasi</th>
                                     {{-- <th>Geojson</th> --}}
                                     <th>Deskripsi</th>
@@ -45,6 +46,16 @@
                                 @foreach ($locations as $index => $item)
                                     <tr>
                                         <td>{{ $locations->firstItem() + $index }}</td>
+                                        <td>
+                                            @if ($item->gambar->isNotEmpty())
+                                            <button data-toggle="modal" data-target="#gambar"
+                                            wire:click="gambar({{ $item->id }})">
+                                                <img width="150" class="img-thumbnail" src="/storage/gambar/{{$item->gambar->first()->nama_gambar}}" alt="gambar" loading="lazy">
+                                            </button>
+                                            @else
+                                                Belum Ada Gambar
+                                            @endif
+                                        </td>
                                         <td>{{ $item->nama_lokasi }}</td>
                                         {{-- <td>{{ $item->geojson }}</td> --}}
                                         <td>{{ $item->deskripsi }}</td>
@@ -93,4 +104,5 @@
         @endpush
         @include('admin/kelolamaps/modaltambah')
         @include('admin/kelolamaps/modaledit')
+        @include('admin/kelolamaps/modalgambar')
     </div>

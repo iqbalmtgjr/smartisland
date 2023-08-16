@@ -2,16 +2,21 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Gambar;
 use Livewire\Component;
 use App\Models\Location;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class KelolaMaps extends Component
 {
     use WithPagination;
+    use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
 
-    public $nama_lokasi, $geojson, $deskripsi, $validator, $location_id;
+    public $nama_lokasi, $longtitude, $lattitude, $deskripsi, $validator, $location_id;
+    public $gambar = [];
     public $updateMode = false;
     public $paginate = 5;
     public $search;
@@ -37,8 +42,10 @@ class KelolaMaps extends Component
     private function resetInput()
     {
         $this->nama_lokasi = null;
-        $this->geojson = null;
+        $this->longtitude = null;
+        $this->lattitude = null;
         $this->deskripsi = null;
+        $this->gambar = null;
     }
 
     public function store()
@@ -46,15 +53,33 @@ class KelolaMaps extends Component
         // dd(request()->serverMemo['data']);
         $validator = $this->validate([
             'nama_lokasi' => 'required',
-            'geojson' => 'required',
-            'deskripsi' => 'required'
+            'longtitude' => 'required',
+            'lattitude' => 'required',
+            'deskripsi' => 'required',
+            'gambar.*' => 'image|max:1024'
         ]);
 
         $location = Location::create([
             'nama_lokasi' => $this->nama_lokasi,
-            'geojson' => $this->geojson,
+            'long' => $this->longtitude,
+            'lat' => $this->lattitude,
             'deskripsi' => $this->deskripsi
         ]);
+
+        if ($this->gambar) {
+            foreach ($this->gambar as $file) {
+                $filename = time() . rand(1, 200) . '.' . $file->extension();
+                // $file->move(public_path('gambar'), $filename);
+                Storage::putFileAs('public/gambar', $file, $filename);
+                // $file->storeAs('gambar', $filename);
+
+                Gambar::create([
+                    'location_id' => $location->id,
+                    'nama_gambar' => $filename
+                ]);
+            }
+        }
+
 
         $this->resetInput();
 
@@ -70,8 +95,20 @@ class KelolaMaps extends Component
         $location = Location::find($id);
         $this->location_id = $location->id;
         $this->nama_lokasi = $location->nama_lokasi;
-        $this->geojson = $location->geojson;
+        $this->longtitude = $location->long;
+        $this->lattitude = $location->lat;
         $this->deskripsi = $location->deskripsi;
+    }
+
+    public function gambar($id)
+    {
+        $this->updateMode = false;
+        $location = Gambar::where('location_id', $id);
+        // $this->location_id = $location->id;
+        // $this->nama_lokasi = $location->nama_lokasi;
+        // $this->longtitude = $location->long;
+        // $this->lattitude = $location->lat;
+        // $this->deskripsi = $location->deskripsi;
     }
 
     public function update()
@@ -79,17 +116,35 @@ class KelolaMaps extends Component
         // dd($this->id);
         $validator = $this->validate([
             'nama_lokasi' => 'required',
-            'geojson' => 'required',
-            'deskripsi' => 'required'
+            'longtitude' => 'required',
+            'lattitude' => 'required',
+            'deskripsi' => 'required',
+            'gambar.*' => 'image|max:1024'
         ]);
 
         if ($this->location_id) {
             $location = Location::find($this->location_id);
             $location->update([
                 'nama_lokasi' => $this->nama_lokasi,
-                'geojson' => $this->geojson,
+                'long' => $this->longtitude,
+                'lat' => $this->lattitude,
                 'deskripsi' => $this->deskripsi
             ]);
+
+            if ($this->gambar) {
+                foreach ($this->gambar as $file) {
+                    $filename = time() . rand(1, 200) . '.' . $file->extension();
+                    // $file->move(public_path('gambar'), $filename);
+                    Storage::putFileAs('public/gambar', $file, $filename);
+                    // $file->storeAs('gambar', $filename);
+
+                    Gambar::updateOrCreate([
+                        'location_id' => $location->id,
+                        'nama_gambar' => $filename
+                    ]);
+                }
+            }
+
             $this->updateMode = false;
             session()->flash('sukses', 'Data berhasil diedit!');
             $this->resetInput();
