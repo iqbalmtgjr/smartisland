@@ -8,7 +8,7 @@
             <div class="modal-body">
                     <div class="container-fluid">
                         <div class="col-md-4">
-
+                            
                         </div>
                     </div>
             </div>
