@@ -17,6 +17,7 @@ class KelolaMaps extends Component
 
     public $nama_lokasi, $longtitude, $lattitude, $deskripsi, $validator, $location_id;
     public $gambar = [];
+    public $imageUrl;
     public $updateMode = false;
     public $paginate = 5;
     public $search;
@@ -41,11 +42,11 @@ class KelolaMaps extends Component
 
     private function resetInput()
     {
-        $this->nama_lokasi = null;
-        $this->longtitude = null;
-        $this->lattitude = null;
-        $this->deskripsi = null;
-        $this->gambar = null;
+        $this->nama_lokasi = '';
+        $this->longtitude = '';
+        $this->lattitude = '';
+        $this->deskripsi = '';
+        $this->gambar = '';
     }
 
     public function store()
@@ -66,12 +67,10 @@ class KelolaMaps extends Component
             'deskripsi' => $this->deskripsi
         ]);
 
-        if ($this->gambar) {
+        if ($this->gambar != null) {
             foreach ($this->gambar as $file) {
                 $filename = time() . rand(1, 200) . '.' . $file->extension();
-                // $file->move(public_path('gambar'), $filename);
                 Storage::putFileAs('public/gambar', $file, $filename);
-                // $file->storeAs('gambar', $filename);
 
                 Gambar::create([
                     'location_id' => $location->id,
@@ -134,9 +133,7 @@ class KelolaMaps extends Component
             if ($this->gambar) {
                 foreach ($this->gambar as $file) {
                     $filename = time() . rand(1, 200) . '.' . $file->extension();
-                    // $file->move(public_path('gambar'), $filename);
                     Storage::putFileAs('public/gambar', $file, $filename);
-                    // $file->storeAs('gambar', $filename);
 
                     Gambar::updateOrCreate([
                         'location_id' => $location->id,
@@ -163,7 +160,6 @@ class KelolaMaps extends Component
 
     public function handleStored($location)
     {
-        // dd($mapp);
         session()->flash('sukses', 'Data berhasil diinput!');
     }
 }

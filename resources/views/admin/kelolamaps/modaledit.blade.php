@@ -56,7 +56,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label">Upload Gambar</label>
-                                    <input wire:model="gambar" type="file" class="form-control" multiple id="">
+                                    <input wire:model="gambar" type="file" class="form-control" multiple
+                                        id="">
                                     @error('gambar')
                                         <div class="text-danger ml-3 mt-2">
                                             {{ $message }}

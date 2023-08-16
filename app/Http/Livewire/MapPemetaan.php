@@ -4,10 +4,14 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Location;
+use Livewire\WithFileUploads;
 
 class MapPemetaan extends Component
 {
-    public $long, $lat;
+    use WithFileUploads;
+    public $nama_lokasi, $long, $lat, $deskripsi, $validator, $locationId;
+    public $gambar = [];
+    public $imageUrl;
     public $geoJson;
 
     private function loadLocations()
@@ -44,5 +48,16 @@ class MapPemetaan extends Component
     {
         $this->loadLocations();
         return view('livewire.map-pemetaan');
+    }
+
+    public function findLocationById($id)
+    {
+        $location = Location::findOrFail($id);
+        $this->locationId = $location->id;
+        $this->nama_lokasi = $location->nama_lokasi;
+        $this->long = $location->long;
+        $this->lat = $location->lat;
+        $this->deskripsi = $location->deskripsi;
+        $this->imageUrl = $location->gambar->first()->nama_gambar;
     }
 }
