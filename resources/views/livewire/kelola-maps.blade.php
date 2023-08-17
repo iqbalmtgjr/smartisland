@@ -48,10 +48,12 @@
                                         <td>{{ $locations->firstItem() + $index }}</td>
                                         <td>
                                             @if ($item->gambar->isNotEmpty())
-                                            <button data-toggle="modal" data-target="#gambar"
-                                            wire:click="gambar({{ $item->id }})">
-                                                <img width="150" class="img-thumbnail" src="/storage/gambar/{{$item->gambar->first()->nama_gambar}}" alt="gambar" loading="lazy">
-                                            </button>
+                                                {{-- <button data-toggle="modal" data-target="#gambar"
+                                            wire:click="gambar({{ $item->id }})"> --}}
+                                                <img width="150" class="img-thumbnail"
+                                                    src="/storage/gambar/{{ $item->gambar->first()->nama_gambar }}"
+                                                    alt="gambar" loading="lazy">
+                                                {{-- </button> --}}
                                             @else
                                                 Belum Ada Gambar
                                             @endif

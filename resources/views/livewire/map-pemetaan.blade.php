@@ -32,7 +32,7 @@
                     <div class="card">
                         <div class="card-header">Informasi</div>
                         <div class="card-body">
-                            <div class="row">
+                            {{-- <div class="row mb-5">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Longtitude</label>
@@ -45,21 +45,37 @@
                                         <input wire:model="lat" type="text" class="form-control">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
-                                <div class="form-group">
+                                <div class="form-group mb-3">
                                     <label>Nama Lokasi</label>
                                     <input wire:model="nama_lokasi" type="text" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mb-3">
                                     <label>Deskripsi</label>
                                     <textarea wire:model="deskripsi" class="form-control" id="" cols="30" rows="4"></textarea>
                                 </div>
                                 @if ($imageUrl)
-                                    <div class="form-group">
-                                        <label>Gambar</label> <br>
-                                        <img src="{{ asset('/storage/gambar/' . $imageUrl) }}" class="img-fluid"
-                                            alt="Gambar Lokasi">
+                                    <div wire:ignore.self id="carouselExampleControls" class="carousel slide"
+                                        data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            @foreach ($imageUrl as $item)
+                                                <div class="carousel-item {{ $loop->first ? ' active' : '' }}">
+                                                    <img src="{{ asset('/storage/gambar/' . $item->nama_gambar) }}"
+                                                        class="d-block w-100" alt="Gambar {{ $item->nama_gambar }}">
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <button class="carousel-control-prev" type="button"
+                                            data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                            data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
                                     </div>
                                 @endif
 

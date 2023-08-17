@@ -58,6 +58,6 @@ class MapPemetaan extends Component
         $this->long = $location->long;
         $this->lat = $location->lat;
         $this->deskripsi = $location->deskripsi;
-        $this->imageUrl = $location->gambar->first()->nama_gambar;
+        $this->imageUrl = $location->gambar;
     }
 }
