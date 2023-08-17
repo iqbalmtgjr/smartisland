@@ -58,7 +58,6 @@
                                             @endif
                                         </td>
                                         <td>{{ $item->nama_lokasi }}</td>
-                                        {{-- <td>{{ $item->geojson }}</td> --}}
                                         <td>{{ $item->deskripsi }}</td>
                                         <td>
                                             <button data-toggle="modal" data-target="#edit"
