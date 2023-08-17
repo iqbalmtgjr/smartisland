@@ -36,7 +36,6 @@
                                     <th>No</th>
                                     <th>Gambar</th>
                                     <th>Nama Lokasi</th>
-                                    {{-- <th>Geojson</th> --}}
                                     <th>Deskripsi</th>
                                     <th>Aksi</th>
                                 </tr>
