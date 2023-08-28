@@ -67,7 +67,7 @@ class KelolaMaps extends Component
             'deskripsi' => $this->deskripsi
         ]);
 
-        if ($this->gambar != null) {
+        if ($this->gambar) {
             foreach ($this->gambar as $file) {
                 $filename = time() . rand(1, 200) . '.' . $file->extension();
                 Storage::putFileAs('public/gambar', $file, $filename);

@@ -92,15 +92,15 @@
     <script>
         // Mapbox //
         document.addEventListener('livewire:load', () => {
-            const defaultLocation = [108.7096218906035, 0.7652611408009449]
-            // const defaultLocation = [106.69896789971403, -6.359163593785212]
+            // const defaultLocation = [108.7096218906035, 0.7652611408009449]
+            const defaultLocation = [108.70952132781576, 0.7879973606479496]
 
             mapboxgl.accessToken = "{{ config('app.mapkey') }}";
             var map = new mapboxgl.Map({
                 container: 'map',
                 center: defaultLocation,
                 // zoom: 11,
-                zoom: 12,
+                zoom: 17,
             });
 
             map.on('click', (e) => {
