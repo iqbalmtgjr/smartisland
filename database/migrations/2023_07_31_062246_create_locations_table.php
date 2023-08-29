@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_lokasi');
             $table->string('long');
             $table->string('lat');
-            $table->string('deskripsi');
+            $table->longText('deskripsi');
             $table->timestamps();
         });
     }

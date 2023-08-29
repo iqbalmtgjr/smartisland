@@ -25,7 +25,7 @@
                                     <label for="recipient-name" class="col-form-label">Longtitude</label>
                                     <input wire:model="longtitude" type="text"
                                         class="form-control @error('longtitude') is-invalid @enderror" name=""
-                                        value="" placeholder="Masukkan Longtitude.">
+                                        value="" placeholder="Masukkan longtitude.">
                                     @error('longtitude')
                                         <div class="text-danger ml-3 mt-2">
                                             {{ $message }}

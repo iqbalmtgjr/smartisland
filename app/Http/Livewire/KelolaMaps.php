@@ -46,7 +46,7 @@ class KelolaMaps extends Component
         $this->longtitude = '';
         $this->lattitude = '';
         $this->deskripsi = '';
-        $this->gambar = '';
+        $this->gambar = null;
     }
 
     public function store()
@@ -57,7 +57,7 @@ class KelolaMaps extends Component
             'longtitude' => 'required',
             'lattitude' => 'required',
             'deskripsi' => 'required',
-            'gambar.*' => 'image|max:1024'
+            'gambar.*' => 'image'
         ]);
 
         $location = Location::create([
@@ -67,7 +67,7 @@ class KelolaMaps extends Component
             'deskripsi' => $this->deskripsi
         ]);
 
-        if ($this->gambar) {
+        if ($this->gambar != null) {
             foreach ($this->gambar as $file) {
                 $filename = time() . rand(1, 200) . '.' . $file->extension();
                 Storage::putFileAs('public/gambar', $file, $filename);
@@ -103,22 +103,16 @@ class KelolaMaps extends Component
     {
         $this->updateMode = false;
         $location = Gambar::where('location_id', $id);
-        // $this->location_id = $location->id;
-        // $this->nama_lokasi = $location->nama_lokasi;
-        // $this->longtitude = $location->long;
-        // $this->lattitude = $location->lat;
-        // $this->deskripsi = $location->deskripsi;
     }
 
     public function update()
     {
-        // dd($this->id);
         $validator = $this->validate([
             'nama_lokasi' => 'required',
             'longtitude' => 'required',
             'lattitude' => 'required',
             'deskripsi' => 'required',
-            'gambar.*' => 'image|max:1024'
+            'gambar.*' => 'image'
         ]);
 
         if ($this->location_id) {
@@ -130,6 +124,15 @@ class KelolaMaps extends Component
                 'deskripsi' => $this->deskripsi
             ]);
 
+            //delete image lama
+            // $gambar = Gambar::where('location_id', $location->id)->get();
+            // foreach ($gambar as $value) {
+            //     if ($value) {
+            //         @unlink(public_path('storage/gambar/' . $value->nama_gambar));
+            //     }
+            // }
+
+            // upload & create/update image baru
             if ($this->gambar) {
                 foreach ($this->gambar as $file) {
                     $filename = time() . rand(1, 200) . '.' . $file->extension();
@@ -153,7 +156,20 @@ class KelolaMaps extends Component
     public function delete($id)
     {
         if ($id) {
-            Location::find($id)->delete();
+            // hapus lokasi
+            $location = Location::find($id);
+            $location->delete();
+
+            // hapus gambar
+            $gambar = Gambar::where('location_id', $id)->get();
+            if (!empty($gambar)) {
+                foreach ($gambar as $file) {
+                    @unlink(public_path('storage/gambar/' . $file->nama_gambar));
+                }
+            }
+            foreach ($gambar as $value) {
+                $value->delete();
+            }
             session()->flash('sukses', 'Data berhasil dihapus!');
         }
     }
