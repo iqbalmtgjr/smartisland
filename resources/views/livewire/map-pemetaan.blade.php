@@ -49,13 +49,13 @@
                                 </div>
                             </div> --}}
                             <div class="row">
-                                <div class="form-group mb-3">
+                                {{-- <div class="form-group mb-3">
                                     <label>Nama Lokasi</label>
                                     <input wire:model="nama_lokasi" type="text" class="form-control">
-                                </div>
+                                </div> --}}
                                 <div class="form-group mb-3">
                                     <label>Deskripsi</label>
-                                    <textarea wire:model="deskripsi" class="form-control" id="" cols="30" rows="9"></textarea>
+                                    <textarea style="background-color: white" disabled wire:model="deskripsi" class="form-control" id="" cols="30" rows="15"></textarea>
                                 </div>
                                 @if ($imageUrl)
                                     <div wire:ignore.self id="carouselExampleControls" class="carousel slide"
